@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Divine Tarot Reveal</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #1b1a2f, #3e2f5b);
+      color: #fdf6e3;
+      font-family: 'Georgia', serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #ffd700;
+    }
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      transition: opacity 0.5s;
+    }
+    .card {
+      width: 150px;
+      height: 220px;
+      border: 2px solid #fff3;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff3;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .meaning-box {
+      display: none;
+      margin-top: 30px;
+    }
+    .selected-card {
+      width: 200px;
+      height: 300px;
+      margin: 0 auto 20px auto;
+      border: 2px solid #fff3;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #d4af37;
+      overflow: hidden;
+    }
+    .selected-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .meaning-text {
+      font-size: 1.2em;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #fff3;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 15px #d4af37;
+    }
+    .back-button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: #d4af37;
+      color: #1b1a2f;
+      cursor: pointer;
+      box-shadow: 0 0 10px #d4af37;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose Your Destiny</h1>
+  <div class="card-container" id="cardContainer"></div>
+
+  <div class="meaning-box" id="meaningBox">
+    <div class="selected-card" id="selectedCardImage"></div>
+    <div class="meaning-text" id="meaningText"></div>
+    <button class="back-button" id="backButton">🔙 Back</button>
+  </div>
+
+  <script>
+
+
+    const cardData = [
+      {
+        image: "https://drive.google.com/thumbnail?id=1jPH_kLf9ULp_22I9ZWnSwJOq7449ZK5a",
+        meaning: "You are at the beginning of a sacred journey. Trust your instincts."
+      },
+      {
+        image: "https://drive.google.com/thumbnail?id=1n1nH7BQ4T7C7KqG1eAJJzWr0KgZ_r5w7",
+        meaning: "A challenge lies ahead, but wisdom surrounds you."
+      },
+      {
+        image: "https://drive.google.com/thumbnail?id=1NBQM_nLZrXg-1XwDQguRuQLuY1JcLYtA",
+        meaning: "Inner truth will rise to the surface—be still and listen."
+      },
+      {
+        image: "https://drive.google.com/thumbnail?id=1YZfQIpOLx0AVw-zztabicEoY84BqSEwh",
+        meaning: "A transformation is unfolding—embrace the unknown."
+      },
+      {
+        image: "https://drive.google.com/thumbnail?id=1avShjqLGd4H8hHVGh4HDD20rgnsVQToP",
+        meaning: "Light will pierce the fog. Clarity is coming."
+      },
+      {
+        image: "https://drive.google.com/thumbnail?id=1avShjqLGd4H8hHVGh4HDD20rgnsVQToP",
+        meaning: "Light will pierce the fog. Clarity is coming."
+      }
+
+    ];
+
+    const container = document.getElementById('cardContainer');
+    const meaningBox = document.getElementById('meaningBox');
+    const selectedCardImage = document.getElementById('selectedCardImage');
+    const meaningText = document.getElementById('meaningText');
+    const backButton = document.getElementById('backButton');
+
+    function showCards() {
+      container.innerHTML = '';
+      container.style.opacity = '1';
+      meaningBox.style.display = 'none';
+
+      cardData.forEach((card, index) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `<img src="${card.image}" alt="Tarot Card ${index + 1}">`;
+        div.addEventListener('click', () => showMeaning(card));
+        container.appendChild(div);
+      });
+    }
+
+    function showMeaning(card) {
+      container.style.opacity = '0';
+      setTimeout(() => {
+        container.innerHTML = '';
+        selectedCardImage.innerHTML = `<img src="${card.image}" alt="Selected Card">`;
+        meaningText.textContent = card.meaning;
+        meaningBox.style.display = 'block';
+      }, 400);
+    }
+
+    backButton.addEventListener('click', showCards);
+
+    showCards();
+
+
+  </script>
+<div style="margin-top: 60px; font-size: 0.9em; color: #ccc; text-align: center;">
+  WebAppMade by <strong>Horizon</strong><br>
+  Art&Reading by <strong>Bamboo Card Reading</strong><br>
+  Last update: <strong>8/5/2025</strong>
+</div>
+</body>
+</html>
